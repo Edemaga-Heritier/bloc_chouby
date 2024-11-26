@@ -1,0 +1,13 @@
+@let(title='Inscription')
+@include('partials/header')
+
+<h1 class="text-center">{{title}}</h1>
+<form action="" method="post" class="w-75 mx-auto p-3 bg-light rounded">
+    {{csrfField()}}
+    @!component('conponents/input', { name:'username',label:'Nom Utilisateur' })
+        @!component('conponents/input', { name:'email',label:'email',type:'email' })
+            @!component('conponents/input', { name:'thumbail',label:'Photo de profil',type:'email' })
+                @!component('conponents/input', { name:'password',label:'Mot de passe', type:'password' })
+                <button class="btn btn-outline-info mt-2" type="submit>{{titlt}}</button>
+</form>
+@include('partials/footer')
