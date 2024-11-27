@@ -2,12 +2,13 @@
 @include('partials/header')
 
 <h1 class="text-center">{{title}}</h1>
-<form action="" method="post" class="w-75 mx-auto p-3 bg-light rounded">
-    {{csrfField()}}
-    @!component('conponents/input', { name:'username',label:'Nom Utilisateur' })
-        @!component('conponents/input', { name:'email',label:'email',type:'email' })
-            @!component('conponents/input', { name:'thumbail',label:'Photo de profil',type:'email' })
-                @!component('conponents/input', { name:'password',label:'Mot de passe', type:'password' })
-                <button class="btn btn-outline-info mt-2" type="submit>{{titlt}}</button>
+<form action="" method="post" class="w-25 mx-auto p-3 bg-light rounded" enctype="multipart/form-data">
+    {{csrfField ()}} 
+    @!component('conponents/input', { name:'Username',label:'Nom Utilisateur' })
+        @!component('conponents/input', { name:'Email',label:'Email',type:'Email' })
+              @!component('conponents/input', { name:'Thumbail',label:'Photo de profil',type:'file' })  
+                @!component('conponents/input', { name:'Password',label:'Mot de passe', type:'Password' })
+            <button type="submit" class="btn btn-primary mt-2">{{title}}</button>
 </form>
+
 @include('partials/footer')
