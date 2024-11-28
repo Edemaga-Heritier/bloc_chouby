@@ -1,0 +1,11 @@
+@if(flashMessages.has('success')) 
+    <div class="alert alert-sucess">
+        {{old('success')}}
+    </div>
+@end
+
+@error('E_INVALID_credentials')
+<div class="alert alert-danger">
+    {{$message}}
+</div>
+@end

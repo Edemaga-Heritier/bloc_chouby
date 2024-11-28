@@ -24,3 +24,10 @@ export const registerUserValidator = vine.compile(
     thumbail: vine.file({ extnames: ['jpg', 'jpeg', 'png'], size: '10mb' }).optional(),
   })
 )
+
+export const LoginUserValidator = vine.compile(
+  vine.object({
+    email: vine.string().trim().email(),
+    password: vine.string().minLength(8),
+  })
+)

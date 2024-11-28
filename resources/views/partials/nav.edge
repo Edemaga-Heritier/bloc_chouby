@@ -1,9 +1,32 @@
+@eval(await auth.use('web').check())
+
 <nav class="navbar bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{route('home')}}">Chouby</a>
         <div>
+
+            @if(!auth.use('web').isAuthenticated)
             <a href="{{ route('auth.register') }}" class="btn btn-primary">Inscription</a>
             <a href="{{ route('auth.login') }}" class="btn btn-primary">Login</a>
+@else
+@!component('components/badget, {username:auth.use('web').user.username,Thumbail: :auth.use('web').user.Thumbail})
+    
+@end
+    <form action="{{route('auth.logout')}}?_method=DELETE" method="post">
+        {{csrfField()}}
+        <button class="btn btn-primary " type="submit">Deconnexion</button>
+    
+    
+    </form>
+@end
+
+
+
+            
+
+            
+
+            
 
         </div>
     </div>
