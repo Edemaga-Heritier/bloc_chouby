@@ -10,6 +10,12 @@ const allyConfig = defineConfig({
     scopes: ['user', 'gist'],
     allowSignup: true,
   }),
+  // Add more social providers as needed
+  google: services.google({
+    clientId: env.get('GOOGLE_CLIENT_ID'),
+    clientSecret: env.get('GOOGLE_CLIENT_SECRET'),
+    callbackUrl: 'http://localhost:3333/github/callback',
+  }),
 })
 
 export default allyConfig

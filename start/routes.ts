@@ -31,3 +31,13 @@ router
   .get('/github/callback', [SocialsController, 'githubCallback'])
   .as('github.callback')
   .use(middleware.guest())
+
+router
+  .get('/google/redirect', [SocialsController, 'googleRedirect'])
+  .as('google.redirect')
+  .use(middleware.guest())
+
+router
+  .get('/google/callback', [SocialsController, 'googleCallback'])
+  .as('google.callback')
+  .use(middleware.guest())
