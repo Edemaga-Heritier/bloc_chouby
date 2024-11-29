@@ -9,9 +9,8 @@
             <a href="{{ route('auth.register') }}" class="btn btn-primary">Inscription</a>
             <a href="{{ route('auth.login') }}" class="btn btn-primary">Login</a>
 @else
-@!component('components/badget, {username:auth.use('web').user.username,Thumbail: :auth.use('web').user.Thumbail})
     
-@end
+ 
     <form action="{{route('auth.logout')}}?_method=DELETE" method="post">
         {{csrfField()}}
         <button class="btn btn-primary " type="submit">Deconnexion</button>

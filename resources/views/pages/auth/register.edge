@@ -2,13 +2,18 @@
 @include('partials/header')
 
 <h1 class="text-center">{{title}}</h1>
-<form action="{{ route('auth.login') }}" method="post" class="w-25 mx-auto p-3 bg-light rounded" enctype="multipart/form-data">
+<form action="" method="post" class="w-25 mx-auto p-3 bg-light rounded" enctype="multipart/form-data">
     {{csrfField ()}} 
     @!component('conponents/input', { name:'Username',label:'Nom Utilisateur' })
         @!component('conponents/input', { name:'Email',label:'Email',type:'Email' })
               @!component('conponents/input', { name:'Thumbail',label:'Photo de profil',type:'file' })  
                 @!component('conponents/input', { name:'Password',label:'Mot de passe', type:'Password' })
             <button type="submit" class="btn btn-primary mt-2">{{title}}</button>
+           
+            <div class="w-50 mx-auto text-center">
+                <p>OU Avec</p>
+                <a class="btn btn-primary mt-2 d-block mx-auto" href="{{route('github.redirect')}}">github</a>
+            </div>
 </form>
 
 @include('partials/footer')

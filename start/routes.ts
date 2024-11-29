@@ -10,6 +10,7 @@
 const AuthController = () => import('#controllers/auth_controller')
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+const SocialsController = () => import('#controllers/socials_controller')
 
 router.on('/').render('pages/home').as('home')
 
@@ -20,3 +21,13 @@ router.get('/login', [AuthController, 'login']).as('auth.login').use(middleware.
 router.post('/login', [AuthController, 'handleLogin']).use(middleware.guest())
 
 router.delete('/login', [AuthController, 'logout']).as('auth.logout').use(middleware.auth())
+
+router
+  .get('/github/redirect', [SocialsController, 'githubRedirect'])
+  .as('github.redirect')
+  .use(middleware.guest())
+
+router
+  .get('/github/callback', [SocialsController, 'githubCallback'])
+  .as('github.callback')
+  .use(middleware.guest())
