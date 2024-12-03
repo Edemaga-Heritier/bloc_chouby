@@ -44,3 +44,4 @@ router
   .use(middleware.guest())
 
 router.get('/post/create', [PostController, 'create']).as('post.create').use(middleware.auth())
+router.post('/post/create', [PostController, 'store']).use(middleware.auth())
