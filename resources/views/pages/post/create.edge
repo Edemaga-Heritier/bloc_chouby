@@ -4,10 +4,10 @@
 <h1 class="text-center">{{title}}</h1>
 <form action="" method="post" class="w-25 mx-auto p-3 bg-light rounded " enctype="multipart/form-data">
     {{csrfField ()}}
-    @!component('conponents/input', { name:'title',label:'Titre' })
+    @!component('conponents/input', { name:'title',label:'Titre',value:old('title') })
  
     @!component('conponents/input', { name:'Thumbail',label:'Miniature',type:'file' })
-    @!component('conponents/input', { name:'content',label:'contenu', type:'textarea' })
+    @!component('conponents/input', { name:'content',label:'contenu', type:'textarea',value:old('content') })
     <button type="submit" class="btn btn-primary mt-2">{{title}}</button>
 </form>  
 

@@ -1,9 +1,14 @@
+import Post from '#models/post'
+import { FileUploaderService } from '#services/file_uploader_service'
+import { storePostValidator } from '#validators/post'
+import { inject } from '@adonisjs/core'
+import stringHelpers from '@adonisjs/core/helpers/string'
 import type { HttpContext } from '@adonisjs/core/http'
 
+@inject()
 export default class PostController {
-  /**
-   * Display a list of resource
-   */
+  constructor(private readonly fileUploaderService: FileUploaderService) {}
+
   async index({}: HttpContext) {}
 
   /**
@@ -16,7 +21,20 @@ export default class PostController {
   /**
    * Handle form submission for the create action
    */
-  async store({ request }: HttpContext) {}
+  async store({ request, auth, response, session }: HttpContext) {
+    const { content, title, thumbail } = await request.validateUsing(storePostValidator)
+    const slug = stringHelpers.slug(title).toLocaleLowerCase()
+    const filePath = await this.fileUploaderService.upload(thumbail, slug, '', 'posts')
+    await Post.create({
+      title,
+      content,
+      slug,
+      thumbail: filePath,
+      userId: auth.user!.id,
+    })
+    session.flash('success', 'Votre article e bien été publie')
+    return response.redirect().toRoute('home')
+  }
 
   /**
    * Show individual record
