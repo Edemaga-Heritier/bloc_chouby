@@ -1,0 +1,21 @@
+ @let(title='Publier du contenu')
+@include('partials/header')
+
+<h1 class="text-center">{{title}}</h1>
+<form action="" method="post" class="w-25 mx-auto p-3 bg-light rounded" enctype="multipart/form-data">
+    {{csrfField ()}}
+    @!component('conponents/input', { name:'title',label:'Titre' })
+ 
+    @!component('conponents/input', { name:'Thumbail',label:'Miniature',type:'file' })
+    @!component('conponents/input', { name:'content',label:'contenu', type:'textarea' })
+    <button type="submit" class="btn btn-primary mt-2">{{title}}</button>
+</form>  
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
+<script>
+    new SimpleMDE({element: document.querySelector(#content)})
+</script>
+    
+@include('partials/footer') 

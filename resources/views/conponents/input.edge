@@ -1,8 +1,14 @@
 <div class="form-group">
+
     <label for="{{ name }}">
-        {{ label || name }}
+        {{ label }}
     </label>
-    <input type="{{ type || 'text' }}" name="{{ name }}" id="{{ name }}" class="{{ cls || 'form-control' }}">
+    @if(type ==='textarea' ) 
+        <textarea name="{{name}}" id="{{name}}" class="{{ cls || 'form-control' }}">{{value || ''}}</textarea>
+ @else
+    
+    <input type="{{ type || 'text' }}" name="{{ name }}" id="{{ name }}" class="{{ cls || 'form-control' }}" value="{{value || ''}}">
+    @end
 </div>
 
 @inputError(name)

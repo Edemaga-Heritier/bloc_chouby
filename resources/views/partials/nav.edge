@@ -6,13 +6,15 @@
         <div>
 
             @if(!auth.use('web').isAuthenticated)
+            <a href="{{route('auth.register')}}" class="btn btn-outline-info">Inscription</a>
+            <a href="{{route('auth.login')}}" class="btn btn-outline-info">Connexion</a>
           
 @else
     
- 
+<a href="{{route('post.create')}}" class="btn btn-outline-info">Publier ?</a>
     <form action="{{route('auth.logout')}}?_method=DELETE" method="post">
         {{csrfField()}}
-        <button class="btn btn-primary " type="submit">Deconnexion</button>
+        <button class="btn btn-outline-warning " type="submit">Deconnexion</button>
     
     
     </form>

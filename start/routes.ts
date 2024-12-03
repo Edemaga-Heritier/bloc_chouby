@@ -10,6 +10,7 @@
 const AuthController = () => import('#controllers/auth_controller')
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+const PostController = () => import('#controllers/post_controller')
 const SocialsController = () => import('#controllers/socials_controller')
 
 router.on('/').render('pages/home').as('home')
@@ -41,3 +42,5 @@ router
   .get('/google/callback', [SocialsController, 'googleCallback'])
   .as('google.callback')
   .use(middleware.guest())
+
+router.get('/post/create', [PostController, 'create']).as('post.create').use(middleware.auth())
