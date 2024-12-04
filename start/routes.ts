@@ -13,12 +13,12 @@ import { middleware } from './kernel.js'
 const PostController = () => import('#controllers/post_controller')
 const SocialsController = () => import('#controllers/socials_controller')
 
-router.on('/').render('pages/home').as('home')
+router.get('/', [PostController, 'index']).as('home')
 
 router.get('/register', [AuthController, 'register']).as('auth.register').use(middleware.guest())
 router.post('/register', [AuthController, 'handleRegister']).use(middleware.guest())
 
-router.get('/login', [AuthController, 'login']).as('auth.login').use(middleware.guest())
+router.get('/login', [AuthController, 'handleLogin']).as('auth.login').use(middleware.guest())
 router.post('/login', [AuthController, 'handleLogin']).use(middleware.guest())
 
 router.delete('/login', [AuthController, 'logout']).as('auth.logout').use(middleware.auth())

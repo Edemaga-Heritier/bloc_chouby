@@ -9,7 +9,10 @@ import type { HttpContext } from '@adonisjs/core/http'
 export default class PostController {
   constructor(private readonly fileUploaderService: FileUploaderService) {}
 
-  async index({}: HttpContext) {}
+  async index({ view }: HttpContext) {
+    const posts = await Post.query().select('id', 'title', 'content', 'slug', 'thumbail')
+    return view.render('pages/home', { posts })
+  }
 
   /**
    * Display form to create a new record

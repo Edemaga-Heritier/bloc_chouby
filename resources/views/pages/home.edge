@@ -1,5 +1,22 @@
+@let(title='Nos publiblication')
 @include('partials/header')
-<h1>Hello Edems</h1>
+<div class="container">
+  <h1 class="text-center my-2">{{title}}</h1>
+</div>
+
+<div>
+  @each(post in posts)
+  <div class="card" style="width: 18rem;">
+    <img src="{{post.thumbail}}" class="card-img-top" alt="{{post.title}}">
+    <div class="card-body">
+      <h5 title="{{post.title}}" class="card-title">{{post.title}}</h5>
+      <p class="card-text">Ecrit par: </p>
+      <a href="#" class="btn btn-primary">lire cete article</a>
+    </div>
+  </div>
+  @end
+</div>
+
 @include('partials/footer')
 
   </body>
