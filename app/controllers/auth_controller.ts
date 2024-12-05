@@ -3,7 +3,6 @@ import { LoginUserValidator, registerUserValidator } from '#validators/auth'
 import { cuid } from '@adonisjs/core/helpers'
 import type { HttpContext } from '@adonisjs/core/http'
 import app from '@adonisjs/core/services/app'
-// eslint-disable-next-line @unicorn/prefer-node-protocol
 
 import { toPng } from 'jdenticon'
 import { writeFile } from 'node:fs/promises'
@@ -30,6 +29,14 @@ export default class AuthController {
   }
 
   async login({ request, auth, response, session }: HttpContext) {
+    const { email, password } = await request.validateUsing(LoginUserValidator)
+    const user = await User.verifyCredentials(email, password)
+    await auth.use('web').login(user)
+    session.flash('success', 'connexion reussie')
+    return response.redirect().toRoute('home')
+  }
+
+  async handleLogin({ request, auth, response, session }: HttpContext) {
     const { email, password } = await request.validateUsing(LoginUserValidator)
     const user = await User.verifyCredentials(email, password)
     await auth.use('web').login(user)

@@ -1,9 +1,9 @@
 @eval(await auth.use('web').check())
-
 <nav class="navbar bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{route('home')}}">Chouby</a>
-        <div>
+    </div>
+
 
             @if(!auth.use('web').isAuthenticated)
             <a href="{{route('auth.register')}}" class="btn btn-outline-info" up-target=".main">Inscription</a>
@@ -11,7 +11,7 @@
           
 @else
     
-<a href="{{route('post.create')}}" class="btn btn-outline-info" up-layer="new">Publier ?</a>
+<a href="{{route('post.create')}}" class="btn btn-outline-info" up-layer="new" up-mode="drawer"up-size="full">Publier ?</a>
     <form action="{{route('auth.logout')}}?_method=DELETE" method="post">
         {{csrfField()}}
         <button class="btn btn-outline-warning " type="submit">Deconnexion</button>
@@ -19,6 +19,7 @@
     
     </form>
 @end
+
 
 
 

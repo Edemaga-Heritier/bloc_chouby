@@ -5,10 +5,11 @@
 <form action="" up-target=".main" method="post" class="w-25 mx-auto p-3 bg-light rounded text-dark">
     {{csrfField()}}
    
-    {{--  @!component('conponents/input', { name:'email',label:'Email',type:'email' })
+      @!component('conponents/input', { name:'email',label:'Email',type:'email' })
       @!component('conponents/input', { name:'password',label:'Mot de passe', type:'password' })
-<button type="submit" class="btn btn-primary mt-2">{{title}}</button>
-<div class="w-50 mx-auto text-center">  --}}
+      <button type="submit" class="btn btn-primary mt-2">{{title}}</button>
+
+<div class="w-50 mx-auto text-center">  
 </div  class="d-grid gap-2 col-6 mx-auto text-center">
   <a class="btn btn-outline-info btn-lg mx-auto" href="{{route('github.redirect')}}">Github</a>
   <a class="btn btn-outline-info btn-lg mx-auto" href="{{route('google.redirect')}}">Google</a>
