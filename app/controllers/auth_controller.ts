@@ -29,7 +29,7 @@ export default class AuthController {
     return response.redirect().toRoute('auth.login')
   }
 
-  async handleLogin({ request, auth, response, session }: HttpContext) {
+  async login({ request, auth, response, session }: HttpContext) {
     const { email, password } = await request.validateUsing(LoginUserValidator)
     const user = await User.verifyCredentials(email, password)
     await auth.use('web').login(user)

@@ -2,7 +2,7 @@
 @include('partials/header')
 
 <h1 class="text-center">{{title}}</h1>
-<form action="" method="post" class="w-25 mx-auto p-3 bg-light rounded text-dark">
+<form action="" up-target=".main" method="post" class="w-25 mx-auto p-3 bg-light rounded text-dark">
     {{csrfField()}}
    
     {{--  @!component('conponents/input', { name:'email',label:'Email',type:'email' })

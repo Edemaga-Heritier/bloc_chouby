@@ -88,7 +88,7 @@ export default class PostController {
     if (post.content !== content) post.merge({ content })
     await post.save()
 
-    session.flash('success', 'Votre article e bien été publie')
+    session.flash('success', 'Votre article e bien été mis à jour')
     return response.redirect().toRoute('home')
   }
 
