@@ -64,7 +64,11 @@ export default class PostController {
   /**
    * Edit individual record
    */
-  async edit({ params }: HttpContext) {}
+  async edit({ params, view }: HttpContext) {
+    const { id } = params
+    const post = await Post.findByOrFail('id', id)
+    return view.render('pages/post/edit', { post })
+  }
 
   /**
    * Handle form submission for the edit action
