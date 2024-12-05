@@ -51,3 +51,9 @@ router
   .as('post.show')
   .where('slug', router.matchers.slug())
   .where('id', router.matchers.number())
+
+router
+  .get('/posts/:id/edit', [PostController, 'edit'])
+  .as('post.edit')
+  .where('id', router.matchers.number())
+  .use(middleware.auth())
