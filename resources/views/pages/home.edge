@@ -14,6 +14,11 @@
       <a href="{{route('post.show',{slug:post.slug, id:post.id})}}" class="btn btn-primary w-100">lire cete article</a>
       <div class="g-flex-justify-content-between"></div>
       <a href="{{route('post.edit',{id:post.id})}}" class="btn btn-outline-warning ">Modifier l'article</a>
+      <form action="{{route('post.delete',{id:post.id})}}?_method=DELETE">
+        {{csrfField ()}}
+        <button class="btn btn-outline-danger"  type="submit">suppression</button>
+
+      </form>
     </div>
   </div>
   @end

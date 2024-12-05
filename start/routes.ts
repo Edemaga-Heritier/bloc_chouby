@@ -63,3 +63,9 @@ router
   .as('post.update')
   .where('id', router.matchers.number())
   .use(middleware.auth())
+
+router
+  .delete('/posts/:id/delete', [PostController, 'destroy'])
+  .as('post.delete')
+  .where('id', router.matchers.number())
+  .use(middleware.auth())

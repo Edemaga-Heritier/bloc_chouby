@@ -1,9 +1,10 @@
 import Post from '#models/post'
 import { FileUploaderService } from '#services/file_uploader_service'
-import { storePostValidator } from '#validators/post'
+import { storePostValidator, updatePostValidator } from '#validators/post'
 import { inject } from '@adonisjs/core'
 import stringHelpers from '@adonisjs/core/helpers/string'
 import type { HttpContext } from '@adonisjs/core/http'
+import { unlink } from 'node:fs/promises'
 import { marked } from 'marked'
 
 @inject()
@@ -73,12 +74,34 @@ export default class PostController {
   /**
    * Handle form submission for the edit action
    */
-  async update({ params, request }: HttpContext) {
-    return request.all()
+  async update({ params, request, session, response }: HttpContext) {
+    const { id } = params
+    const { content, thumbail, title } = await request.validateUsing(updatePostValidator)
+    const post = await Post.findByOrFail('id', id)
+    const slug = post.title !== title && stringHelpers.slug(title)
+    if (thumbail) {
+      await unlink(`public/${post.thumbail}`)
+      const filePath = await this.fileUploaderService.upload(thumbail, '', 'posts')
+      post.merge({ thumbail: filePath })
+    }
+    if (slug) post.merge({ title, slug })
+    if (post.content !== content) post.merge({ content })
+    await post.save()
+
+    session.flash('success', 'Votre article e bien été publie')
+    return response.redirect().toRoute('home')
   }
 
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) {}
+  async destroy({ params, session, response }: HttpContext) {
+    const { id } = params
+    const post = await Post.findByOrFail('id', id)
+    await unlink(`public/${post.thumbail}`)
+    await post.delete()
+
+    session.flash('success', 'Votre article e bien été supprimé')
+    return response.redirect().toRoute('home')
+  }
 }

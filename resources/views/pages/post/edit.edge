@@ -2,7 +2,7 @@
 @include('partials/header')
 
 <h1 class="text-center">{{title}}</h1>
-<form action="{{route('post.update', {id:post.id})}}?_method=PUT" method="post" class="w-25 mx-auto p-3 bg-light rounded " enctype="multipart/form-data">
+<form action="{{route('post.update', {id : post.id})}}?_method=PUT" method="post" class="w-25 mx-auto p-3 bg-light rounded " enctype="multipart/form-data">
     {{csrfField ()}}
     @!component('conponents/input', { name:'title',label:'Titre',value:post.title})
  
