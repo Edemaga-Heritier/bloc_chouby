@@ -9,8 +9,15 @@ import type { HttpContext } from '@adonisjs/core/http'
 export default class PostController {
   constructor(private readonly fileUploaderService: FileUploaderService) {}
 
-  async index({ view }: HttpContext) {
-    const posts = await Post.query().select('id', 'title', 'content', 'slug', 'thumbail')
+  async index({ view, request }: HttpContext) {
+    const page = request.input('page', 1)
+    const limit = 2
+    const posts = await Post.query()
+      .select('id', 'title', 'content', 'slug', 'thumbail', 'user_id')
+      .preload('user', (u) => u.select('username'))
+      .paginate(page, limit)
+    // .orderBy('created_at', 'desc')
+
     return view.render('pages/home', { posts })
   }
 

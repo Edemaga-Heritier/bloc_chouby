@@ -4,20 +4,30 @@
   <h1 class="text-center my-2">{{title}}</h1>
 </div>
 
-<div>
+<div class="d-flex-justify-content-between flex-wrap">
   @each(post in posts)
-  <div class="card" style="width: 18rem;">
+  <div class="card mt-2" style="width: 18rem;">
     <img src="{{post.thumbail}}" class="card-img-top" alt="{{post.title}}">
     <div class="card-body">
-      <h5 title="{{post.title}}" class="card-title">{{post.title}}</h5>
-      <p class="card-text">Ecrit par: </p>
+      <h5 title="{{post.title}}" class="card-title">{{truncate(post.title, 25)}}</h5>
+      <p class="card-text">Ecrit par:{{post.user.username}} </p>
       <a href="#" class="btn btn-primary">lire cete article</a>
     </div>
   </div>
   @end
 </div>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="{{posts.getPreviousPageUrl()}}">Precédent</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="{{posts.getNextPageUrl()}}">Next</a></li>
+  </ul>
+</nav>
+</div>
 
 @include('partials/footer')
 
-  </body>
-</html>
+  
+
