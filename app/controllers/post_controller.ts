@@ -49,9 +49,12 @@ export default class PostController {
   /**
    * Show individual record
    */
-  async show({ params }: HttpContext) {
+  async show({ params, response }: HttpContext) {
     const { slug, id } = params
     const post = await Post.findByOrFail('id', id)
+    if (post.slug !== slug) {
+      return response.redirect().toRoute('post.show', { slug: post.slug, id })
+    }
     return post
   }
 
