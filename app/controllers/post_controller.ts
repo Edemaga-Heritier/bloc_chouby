@@ -4,6 +4,7 @@ import { storePostValidator } from '#validators/post'
 import { inject } from '@adonisjs/core'
 import stringHelpers from '@adonisjs/core/helpers/string'
 import type { HttpContext } from '@adonisjs/core/http'
+import { marked } from 'marked'
 
 @inject()
 export default class PostController {
@@ -49,13 +50,15 @@ export default class PostController {
   /**
    * Show individual record
    */
-  async show({ params, response }: HttpContext) {
+  async show({ params, response, view }: HttpContext) {
     const { slug, id } = params
     const post = await Post.findByOrFail('id', id)
+    // await posts.load('user')
+    const content = marked(post.content)
     if (post.slug !== slug) {
       return response.redirect().toRoute('post.show', { slug: post.slug, id })
     }
-    return post
+    return view.render('pages/post/show', { content, postTitle: post.title })
   }
 
   /**
