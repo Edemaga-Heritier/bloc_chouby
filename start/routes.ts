@@ -57,3 +57,9 @@ router
   .as('post.edit')
   .where('id', router.matchers.number())
   .use(middleware.auth())
+
+router
+  .put('/posts/:id/edit', [PostController, 'update'])
+  .as('post.update')
+  .where('id', router.matchers.number())
+  .use(middleware.auth())

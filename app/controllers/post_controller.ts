@@ -73,7 +73,9 @@ export default class PostController {
   /**
    * Handle form submission for the edit action
    */
-  async update({ params, request }: HttpContext) {}
+  async update({ params, request }: HttpContext) {
+    return request.all()
+  }
 
   /**
    * Delete record
