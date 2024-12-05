@@ -49,7 +49,11 @@ export default class PostController {
   /**
    * Show individual record
    */
-  async show({ params }: HttpContext) {}
+  async show({ params }: HttpContext) {
+    const { slug, id } = params
+    const post = await Post.findByOrFail('id', id)
+    return post
+  }
 
   /**
    * Edit individual record

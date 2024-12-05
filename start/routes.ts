@@ -45,3 +45,9 @@ router
 
 router.get('/post/create', [PostController, 'create']).as('post.create').use(middleware.auth())
 router.post('/post/create', [PostController, 'store']).use(middleware.auth())
+
+router
+  .get('/posts/:slug/:id', [PostController, 'show'])
+  .as('post.show')
+  .where('slug', router.matchers.slug())
+  .where('id', router.matchers.number())
