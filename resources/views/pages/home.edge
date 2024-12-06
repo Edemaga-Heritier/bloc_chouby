@@ -16,14 +16,14 @@
       <a href="{{route('post.edit',{id:post.id})}}" class="btn btn-outline-warning ">Modifier l'article</a>
       <form action="{{route('post.delete',{id:post.id})}}?_method=DELETE">
         {{csrfField ()}}
-        <button class="btn btn-outline-danger"  type="submit">suppression</button>
+        <button class="btn btn-outline-danger"  type="submit">supression</button>
 
       </form>
     </div>
   </div>
   @end
 </div>
-@if(posts.hasPages)
+  @if(posts.hasPages)
 <nav aria-label="Page navigation example">
   <ul class="pagination">
     <li class="page-item {{posts.currentPage === posts.firstPage ? 'disabled' : ''}}"><a class="page-link" href="{{posts.getPreviousPageUrl()}}">Precédent</a></li>
@@ -36,7 +36,8 @@
     <li class="page-item {{!posts.hasMorePages  ? ' disabled' : ''}}"><a class="page-link" href="{{posts.getNextPageUrl()}}">Next</a></li>
   </ul>
 </nav>
-@end
+@end  
+
 </div>
 
 @include('partials/footer')
