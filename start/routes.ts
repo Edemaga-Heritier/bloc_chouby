@@ -16,7 +16,10 @@ const SocialsController = () => import('#controllers/socials_controller')
 router.get('/', [PostController, 'index']).as('home')
 
 router.get('/register', [AuthController, 'register']).as('register').use(middleware.guest())
-router.post('/register', [AuthController, 'register']).as('auth.register').use(middleware.guest())
+router
+  .post('/register', [AuthController, 'handleRegister'])
+  .as('auth.register')
+  .use(middleware.guest())
 
 router.get('/login', [AuthController, 'login']).as('auth.login').use(middleware.guest())
 router.post('/login', [AuthController, 'handleLogin']).use(middleware.guest())
